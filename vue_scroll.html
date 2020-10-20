@@ -18,46 +18,13 @@
 <body>
   <div id="app">
     <h1 id="index">目次</h1>
-    {{ testVal }}
-    <ul>
-      <li><a href="#1">sample1</a></li>
-      <li><a href="#2">sample2</a></li>
-      <li><a href="#3">sample3</a></li>
-      <li><a href="#4">sample4</a></li>
-
-      <li><button v-scroll-to="'#element'" >sample1</button></li>
-
-    </ul>
+    {{ testVal }}  
+      <button v-scroll-to="'#element'" >scroll to elemen</button>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <div id="1">
-      <h2>sample1</h2>
-      <a class="button" href="#index">Topへ</a>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  
-    <div id="2">
-      <h2>sample2</h2>
-      <a class="button" href="#index">Topへ</a>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  
-    <div id="3">
-      <h2>sample3</h2>
-      <a class="button" href="#index">Topへ</a>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  
-    <div id="4">
-      <h2>sample4</h2>
-      <a class="button" href="#index">Topへ</a>
-    </div>
-
-
-    <div id="element">
-      <h2>sample4</h2>
-      <a class="button" href="#index">element</a>
+    <div id="element" style="border:1px solid black;">
+      <p>Hi!</p>
     </div>
     
   </div>
@@ -67,12 +34,11 @@
         el: '#app',
 
         data: {
-            testVal: 'Hello World!' //testValを定義
+            testVal: 'Scroll sample!' //testValを定義
         }
         ,
          methods: {
         }
-
     });
 </script>
 
