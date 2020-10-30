@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div id="app">
+    <h1 id="index">バリデーション</h1>
+    <form
+    id="app"
+    @submit="checkForm"
+    action="#"
+    method="post"
+  >
+  
+    <p style="color:red;" v-if="errors.length">
+      <b>Please correct the following error(s):</b>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
+    </p>
+  
+    <p>
+      <label for="name">Name</label>
+      <input
+        id="name"
+        v-model="name"
+        type="text"
+        name="name"
+      >
+    </p>
+  
+    <p>
+      <label for="age">Age</label>
+      <input
+        id="age"
+        v-model="age"
+        type="number"
+        name="age"
+        min="0"
+      >
+    </p>
+    <p>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        v-model="email"
+        type="email"
+        name="email"
+      >
+    </p>
+    <p>
+      <label for="movie">Favorite Movie</label>
+      <select
+        id="movie"
+        v-model="movie"
+        name="movie"
+      >
+        <option>Star Wars</option>
+        <option>Vanilla Sky</option>
+        <option>Atomic Blonde</option>
+      </select>
+    </p>
+  
+    <p>
+      <input
+        type="submit"
+        value="Submit"
+      >
+    </p>
+  
+  </form>
+  </div>
+<script>
+const app = new Vue({
+  el: '#app',
+  data: {
+    errors: [],
+    name: null,
+    age: null,
+    email: null,
+    movie: null
+  },
+  methods:{
+    checkForm: function (e) {
+      if (this.name && this.age) {
+        return true;
+      }
+
+      this.errors = [];
+      if (!this.name) {
+        this.errors.push('Name required.');
+      }
+      if (!this.age) {
+        this.errors.push('Age required.');
+      }
+      if (!this.validEmail(this.email)) {
+        this.errors.push('Valid email required.');
+      }
+
+      e.preventDefault();
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+  }
+});
+</script>
+</body>
+</html>
