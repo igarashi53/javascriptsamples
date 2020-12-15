@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app" class="container" style="padding-top: 64px;">
+        <div class="container">
+            <div class="error" v-if="error">
+                {{ error }}
+            </div>
+            <div class="columns" v-else>
+                <div class="column">
+                    <div class="message" v-for="bpi_info in info.data.bpi">
+                        <div class="message-header">
+                            <p>
+                                {{ bpi_info.code }}のレート
+                            </p>
+
+                        </div>
+                        <div class="message-body">
+                            レート：{{ bpi_info.rate }}<br/>
+                            詳細：{{ bpi_info.description }}
+                        </div>
+                    </div>
+
+                    <!-- add to stream form -->
+                    <add-to-stream @customcompleted="addStatus"></add-to-stream>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script type="text/javascript">
+        new Vue({
+          el: '#app',
+          data () {
+            return {
+              info: null,
+              error: null
+          }
+      },
+      mounted () {
+        axios
+        .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        .then(response => (this.info = response))
+        .catch(error => (this.error = error))
+    }
+})
+</script>
+</body>
+</html>

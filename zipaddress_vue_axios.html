@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div id="app">
+    <div>
+
+      <input type="text" v-model="zipCode" placeholder="000-0000" />
+      <input type="text" v-model="address" value="{{ address }}" />
+      <button @click="autoCompleteAddress(zipCode)">住所自動入力</button>
+    </div>
+
+
+    </div>
+    <!-- -->
+  <script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+          zipCode: '285-0011',
+          address: '',
+        },
+        methods: {
+          autoCompleteAddress(zipCode){
+            // alert(zipCode);
+              axios.get(`https://api.zipaddress.net/?zipcode=${zipCode}`)
+              .then( function( response ) {
+                alert(response.data.data.fullAddress);
+                this.address = response.data.data.fullAddress;
+              })
+              .catch( function() {
+                this.address = 'error';
+              })
+          }
+        }
+    });
+</script>
+
+</body>
+</html>
