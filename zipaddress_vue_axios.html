@@ -25,8 +25,6 @@
       <input type="text" v-model="address" value="{{ address }}" />
       <button @click="autoCompleteAddress(zipCode)">住所自動入力</button>
     </div>
-
-
     </div>
     <!-- -->
   <script>
@@ -38,13 +36,12 @@
         },
         methods: {
           autoCompleteAddress(zipCode){
-            // alert(zipCode);
+            //  axios ○：arrow　×:function
               axios.get(`https://api.zipaddress.net/?zipcode=${zipCode}`)
-              .then( function( response ) {
-                alert(response.data.data.fullAddress);
+              .then( ( response ) => {
                 this.address = response.data.data.fullAddress;
               })
-              .catch( function() {
+              .catch( ()  => {
                 this.address = 'error';
               })
           }

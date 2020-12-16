@@ -40,17 +40,27 @@
     <script type="text/javascript">
         new Vue({
           el: '#app',
-          data () {
-            return {
+        //   data () {
+        //     return {
+        //       info: null,
+        //       error: null
+        //   }
+        // },
+      data : {
               info: null,
               error: null
-          }
-      },
+          },
       mounted () {
         axios
         .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-        .then(response => (this.info = response))
-        .catch(error => (this.error = error))
+        .then(response => 
+        (
+            this.info = response
+        ))
+        .catch(error => 
+        (
+            this.error = error
+        ))
     }
 })
 </script>
